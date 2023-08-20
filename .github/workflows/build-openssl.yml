@@ -37,14 +37,14 @@ jobs:
     - name: submodules
       run: git submodule update --init --recursive --depth 1
     - name: cmake
-      run: cmake -B build -DUSE_GNUTLS=0 -DUSE_SYSTEM_SRTP=1 -DWARNINGS_AS_ERRORS=1 -DNO_WEBSOCKET=1
+      run: cmake -B build -DUSE_GNUTLS=0 -DUSE_SYSTEM_SRTP=1 -DWARNINGS_AS_ERRORS=1 -DNO_MEDIA=1 -DNO_WEBSOCKET=1
     - name: make
       run: (cd build; make -j2)
     - name: test
       run: ./build/tests
     # Create release
     - name: Rename file
-      run:  find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/linux-openssl-nows-${f##*/}"' \;
+      run:  find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/linux-openssl-nomedia-nows-${f##*/}"' \;
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
@@ -61,7 +61,7 @@ jobs:
     - name: submodules
       run: git submodule update --init --recursive --depth 1
     - name: cmake
-      run: cmake -B build -DUSE_GNUTLS=0 -WARNINGS_AS_ERRORS=1 -DENABLE_LOCAL_ADDRESS_TRANSLATION=1 -DNO_WEBSOCKET=1
+      run: cmake -B build -DUSE_GNUTLS=0 -WARNINGS_AS_ERRORS=1 -DENABLE_LOCAL_ADDRESS_TRANSLATION=1 -DNO_MEDIA=1 -DNO_WEBSOCKET=1
       env:
         OPENSSL_ROOT_DIR: /usr/local/opt/openssl@1.1
     - name: make
@@ -70,7 +70,7 @@ jobs:
       run: ./build/tests
     # Create release
     - name: Rename file
-      run:  find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/darwin-openssl-nows-${f##*/}"' \;
+      run:  find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/darwin-openssl-nomedia-nows-${f##*/}"' \;
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
@@ -88,7 +88,7 @@ jobs:
     - name: submodules
       run: git submodule update --init --recursive --depth 1
     - name: cmake
-      run: cmake -B build -G "NMake Makefiles" -DUSE_GNUTLS=0 -DWARNINGS_AS_ERRORS=1 -DNO_WEBSOCKET=1
+      run: cmake -B build -G "NMake Makefiles" -DUSE_GNUTLS=0 -DWARNINGS_AS_ERRORS=1 -DNO_MEDIA=1 -DNO_WEBSOCKET=1
     - name: nmake
       run: |
         cd build
@@ -98,7 +98,7 @@ jobs:
       run: build/tests.exe
     # Create release
     - name: Rename file
-      run: Get-ChildItem -Recurse -File ./build/ | Rename-Item -NewName { "windows-openssl-nows-"+$_.Name }
+      run: Get-ChildItem -Recurse -File ./build/ | Rename-Item -NewName { "windows-openssl-nomedia-nows-"+$_.Name }
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
