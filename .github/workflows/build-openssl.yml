@@ -55,6 +55,7 @@ jobs:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
         files: |
           ./build/linux-*.so*
+          ./build/linux-*static.a*
           ./include.zip
     # Done release
 
@@ -86,6 +87,7 @@ jobs:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
         files: |
           ./build/darwin-*.dylib*
+          ./build/darwin-*static.a*
     # Done release
 
   build-windows:
@@ -104,9 +106,8 @@ jobs:
       run: |
         cd build
         set CL=/MP
-        more Makefile
-        more Makefiles
         nmake
+        nmake datachannel-static
     - name: test
       run: build/tests.exe
     # Create release
