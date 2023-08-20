@@ -29,6 +29,7 @@ jobs:
           generate_release_notes: false
 
   build-linux:
+    needs: create_release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -53,6 +54,7 @@ jobs:
     # Done release
 
   build-macos:
+    needs: create_release
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
@@ -79,6 +81,7 @@ jobs:
     # Done release
 
   build-windows:
+    needs: create_release
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
