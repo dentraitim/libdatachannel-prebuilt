@@ -53,7 +53,7 @@ jobs:
       with:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
         files: |
-          ./build/linux-openssl-nomedia-nows-*.so*
+          ./build/linux-*.so*
     # Done release
 
   build-macos:
@@ -83,7 +83,7 @@ jobs:
       with:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
         files: |
-          ./build/darwin-openssl-nomedia-nows-*.dylib*
+          ./build/darwin-*.dylib*
     # Done release
 
   build-windows:
@@ -115,7 +115,7 @@ jobs:
       with:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
         files: |
-          ./build/windows-openssl-nomedia-nows-*.pdb*
-          ./build/windows-openssl-nomedia-nows-*.lib*
-          ./build/windows-openssl-nomedia-nows-*.dll*
+          ./build/windows-*datachannel*.pdb*
+          ./build/windows-*datachannel*.lib*
+          ./build/windows-*datachannel*.dll*
     # Done release
