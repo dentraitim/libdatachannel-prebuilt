@@ -45,7 +45,9 @@ jobs:
       run: ./build/tests
     # Create release
     - name: Rename file
-      run:  find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/linux-openssl-nomedia-nows-${f##*/}"' \;
+      run: |
+        find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/linux-openssl-nomedia-nows-${f##*/}"' \;
+        find ./build/
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
@@ -72,7 +74,9 @@ jobs:
       run: ./build/tests
     # Create release
     - name: Rename file
-      run:  find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/darwin-openssl-nomedia-nows-${f##*/}"' \;
+      run: |
+        find ./build/ -type f -exec sh -c 'f="{}" ; mv "$f" "${f%/*}/darwin-openssl-nomedia-nows-${f##*/}"' \;
+        find ./build
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
@@ -101,7 +105,9 @@ jobs:
       run: build/tests.exe
     # Create release
     - name: Rename file
-      run: Get-ChildItem -Recurse -File ./build/ | Rename-Item -NewName { "windows-openssl-nomedia-nows-"+$_.Name }
+      run: |
+        Get-ChildItem -Recurse -File ./build/ | Rename-Item -NewName { "windows-openssl-nomedia-nows-"+$_.Name }
+        Get-ChildItem -Recurse -File ./build/
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
