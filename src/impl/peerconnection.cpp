@@ -457,6 +457,7 @@ void PeerConnection::forwardMessage(message_ptr message) {
 
 	if (message->type == Message::Reset) {
 		// Incoming stream is reset, unregister it
+		std::unique_lock lock(mDataChannelsMutex); // we are going to erase
 		mDataChannels.erase(stream);
 	}
 
