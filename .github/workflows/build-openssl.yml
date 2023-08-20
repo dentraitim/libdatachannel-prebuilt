@@ -52,7 +52,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
-        files: build/*
+        files: |
+          ./build/linux-openssl-nomedia-nows-*.so*
     # Done release
 
   build-macos:
@@ -81,7 +82,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
-        files: build/*
+        files: |
+          ./build/darwin-openssl-nomedia-nows-*.dylib*
     # Done release
 
   build-windows:
@@ -112,5 +114,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ needs.create_release.outputs.release_tag }}
-        files: build/*
+        files: |
+          ./build/windows-openssl-nomedia-nows-*.pdb*
+          ./build/windows-openssl-nomedia-nows-*.lib*
+          ./build/windows-openssl-nomedia-nows-*.dll*
     # Done release
